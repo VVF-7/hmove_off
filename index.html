@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ХМОВЕ — Только с Иисусом</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Переменные (СВЕТЛАЯ ТЕМА + ЖЕЛТЫЕ АКЦЕНТЫ) --- */
+        :root {
+            /* Светлые тона фона */
+            --bg-color: #f8f4fd; /* Очень светлая лаванда */
+            --bg-secondary: #ffffff; /* Чистый белый */
+            --text-color: #2d2d2d; /* Темно-серый текст */
+            --text-muted: #666666;
+            
+            /* Сиреневая палитра */
+            --accent-primary: #9d4edd; /* Сирень */
+            --accent-deep: #7b2cbf;    /* Глубокий фиолетовый */
+            
+            /* Желтый акцент */
+            --accent-yellow: #ffcc00;  /* Яркий желтый */
+            
+            /* Градиенты */
+            --gradient-main: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%); /* Желтый для кнопок */
+            --gradient-text: linear-gradient(to right, #7b2cbf, #9d4edd);
+            
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(123, 44, 191, 0.1); /* Мягкая тень */
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* --- Типографика --- */
+        h1, h2, h3 {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .highlight { color: var(--accent-primary); }
+
+        /* --- Компоненты --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #2d2d2d; /* Темный текст на желтой кнопке */
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 204, 0, 0.6);
+            filter: brightness(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* Очень прозрачный белый фон */
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(5px); /* Легкое размытие для читаемости текста */
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03); /* Почти невидимая граница */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #2d2d2d;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Стили для иконки креста */
+        .cross-icon-svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Анимация применяется к элементу с классом cross-path */
+        .cross-path {
+            /* Анимация цвета и пульсации */
+            animation: pulseAndGlow 3s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes pulseAndGlow {
+            0% {
+                fill: var(--accent-primary); /* Фиолетовый */
+                transform: scale(1);
+                filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0));
+            }
+            50% {
+                fill: var(--accent-yellow); /* Желтый */
+                transform: scale(1.15); /* Увеличение (пульсация) */
+                filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.6)); /* Свечение */
+            }
+            100% {
+                fill: var(--accent-primary); /* Возврат к фиолетовому */
+                transform: scale(1);
+                filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0));
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        /* --- Hero Section (ЧИСТЫЙ ФОН) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Убрано url(...), оставлен чистый градиент */
+            background: linear-gradient(180deg, #f3e5f5 0%, #ffffff 100%);
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeIn Up 1s ease-out;
+        }
+
+        .hero-main-title {
+            font-size: 6rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: #2d2d2d;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Intro / About --- */
+        .intro {
+            padding: 6rem 0;
+            background-color: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-yellow); /* Желтые иконки */
+        }
+
+        /* --- Mission Section --- */
+        .mission {
+            padding: 6rem 0;
+            background-color: var(--bg-color);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .mission-col {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f4fd 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-top: 4px solid var(--accent-primary);
+            box-shadow: var(--shadow);
+        }
+
+        .mission-col h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-deep);
+        }
+
+        .mission-col p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .mission-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #444;
+        }
+
+        .mission-list li::before {
+            content: '💜';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+            top: 4px;
+        }
+
+        /* --- Activities --- */
+        .activities {
+            padding: 6rem 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .activity-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .activity-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .activity-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(90, 24, 154, 0.95), transparent); /* Фиолетовый градиент */
+            padding: 2rem 1.5rem;
+        }
+
+        .activity-overlay h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .activity-overlay p {
+            font-size: 0.9rem;
+            color: #eee;
+        }
+
+        /* --- Testimonials --- */
+        .testimonials {
+            padding: 6rem 0;
+            background-color: var(--bg-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .quote-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
+        }
+
+        .quote-card::before {
+            content: '“';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--accent-yellow); /* Желтая кавычка */
+            opacity: 0.5;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #444;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-main); /* Желтый аватар */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2d2d2d;
+        }
+
+        .author-info h5 { color: #2d2d2d; margin-bottom: 0.2rem; }
+        .author-info span { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* --- Future / Vision (ЧИСТЫЙ ФОН) --- */
+        .vision {
+            padding: 6rem 0;
+            /* Убрано фоновое изображение, добавлен сплошной цвет */
+            background-color: var(--accent-deep); 
+            text-align: center;
+            color: white;
+        }
+
+        .vision-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .vision-item h4 {
+            color: var(--accent-yellow); /* Желтый заголовок */
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vision-item p {
+            color: #e0e0e0;
+            max-width: 300px;
+        }
+
+        /* --- Join / CTA --- */
+        .join {
+            padding: 6rem 0;
+            background-color: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            padding: 2rem;
+            background: var(--bg-color);
+            border-radius: 15px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: var(--accent-yellow); /* Желтый кружок */
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #2d2d2d; /* Темный футер для контраста */
+            padding: 4rem 0 2rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .footer-slogan {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links {
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            margin: 0 15px;
+            color: #aaa;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover { color: var(--accent-yellow); }
+
+        .copyright {
+            color: #777;
+            font-size: 0.8rem;
+            margin-top: 3rem;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 768px) {
+            .hero-main-title { font-size: 4rem; letter-spacing: 5px; }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .section-header h2 { font-size: 1.8rem; }
+            .mission-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- ИЗМЕНЕННЫЙ КРЕСТ: Закругленный, современный стиль -->
+                    <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
+                        <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
+                    </svg>
+                    ХМОВЕ
+                </div>
+                <div class="nav-links">
+                    <a href="#about">О нас</a>
+                    <a href="#mission">Миссия</a>
+                    <a href="#activity">Деятельность</a>
+                    <a href="#join">Вступить</a>
+                </div>
+                <a href="#join" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Вступить</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-main-title">ХМОВЕ</h1>
+            <p class="hero-subtitle">Христианское молодежное объединение веры евангельской</p>
+            <h1>ТОЛЬКО С <span class="highlight">ИИСУСОМ</span></h1>
+            <p>Мы - семья. Мы - движение. Объединение молодых, горящих сердец из разных городов и церквей.</p>
+            <a href="#about" class="btn btn-primary">Узнать больше</a>
+        </div>
+    </section>
+
+    <!-- About / Values -->
+    <section id="about" class="intro">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Мы — семья</h2>
+                <p>ХМОВЕ — это не просто организация. Это пространство, где мы вместе растем, служим и меняем этот мир.</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card fade-in">
+                    <div class="value-icon">♥</div>
+                    <h3>Единство</h3>
+                    <p>Единство в многообразии. Мы вместе, несмотря на различия.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-icon">💜</div>
+                    <h3>Страсть</h3>
+                    <p>Страсть к служению и желание нести свет другим.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-icon">🤝</div>
+                    <h3>Поддержка</h3>
+                    <p>Взаимопомощь и забота друг о друге в любой ситуации.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-icon">🌍</div>
+                    <h3>Влияние</h3>
+                    <p>Глобальное влияние и изменение мира к лучшему.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section id="mission" class="mission">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Наша миссия</h2>
+                <p>Три направления, которые определяют наш путь</p>
+            </div>
+
+            <div class="mission-grid">
+                <!-- Mission 1 -->
+                <div class="mission-col fade-in">
+                    <h3>Объединение</h3>
+                    <p>Мы верим, что вместе мы сможем сделать гораздо больше. Стираем границы между городами и конфессиями.</p>
+                    <ul class="mission-list">
+                        <li>Объединяем молодежь в одну большую СЕМЬЮ</li>
+                        <li>Служим на глобальном уровне</li>
+                        <li>Создаем пространство для роста</li>
+                    </ul>
+                </div>
+
+                <!-- Mission 2 -->
+                <div class="mission-col fade-in">
+                    <h3>Привлечение</h3>
+                    <p>Мы хотим, чтобы каждый молодой человек нашел свой путь к вере через современные форматы общения.</p>
+                    <ul class="mission-list">
+                        <li>Интересные форматы общения</li>
+                        <li>Свидетельство и путь к Крещению</li>
+                        <li>Мотивация к служению в церкви</li>
+                    </ul>
+                </div>
+
+                <!-- Mission 3 -->
+                <div class="mission-col fade-in">
+                    <h3>Обучение</h3>
+                    <p>Помогаем углубить знания Библии, научиться молиться и слышать Бога.</p>
+                    <ul class="mission-list">
+                        <li>Библейские принципы в жизни</li>
+                        <li>Регулярное чтение Библии</li>
+                        <li>Важность молитвы и доверия Богу</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities -->
+    <section id="activity" class="activities">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Жизнь в движении</h2>
+                <p>Мы не стоим на месте. Вот чем мы живем:</p>
+            </div>
+
+            <div class="activity-grid">
+                <div class="activity-card fade-in">
+                    <img src="https://picsum.photos/seed/conference/400/500" alt="Конференции">
+                    <div class="activity-overlay">
+                        <h4>Молодежные конференции</h4>
+                        <p>Масштабные встречи для духовного роста и обмена опытом.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <img src="https://picsum.photos/seed/campfire/400/500" alt="Лагеря">
+                    <div class="activity-overlay">
+                        <h4>Летние лагеря</h4>
+                        <p>Незабываемые каникулы с Богом и новыми друзьями.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <img src="https://picsum.photos/seed/charity/400/500" alt="Социальные проекты">
+                    <div class="activity-overlay">
+                        <h4>Социальные проекты</h4>
+                        <p>Помощь нуждающимся и служение обществу.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <img src="https://picsum.photos/seed/concert/400/500" alt="Музыка">
+                    <div class="activity-overlay">
+                        <h4>Музыкальные фестивали</h4>
+                        <p>Прославление через современную христианскую музыку.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <img src="https://picsum.photos/seed/road/400/500" alt="Туры">
+                    <div class="activity-overlay">
+                        <h4>Евангелизационные туры</h4>
+                        <p>Распространение Благой Вести в разных городах.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Реальные жизни. Реальные перемены.</h2>
+                <p>Истории, которые вдохновляют</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="quote-card fade-in">
+                    <p class="quote-text">"Я нашел здесь настоящих друзей, которые поддерживают меня не только в вере, но и в жизни. ХМОВЕ стало для меня второй семьей."</p>
+                    <div class="quote-author">
+                        <div class="avatar">А</div>
+                        <div class="author-info">
+                            <h5>Алексей</h5>
+                            <span>22 года</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote-card fade-in">
+                    <p class="quote-text">"Моя вера стала живой! Я больше не просто хожу в церковь - я служу, я расту, я вижу, как Бог действует через меня."</p>
+                    <div class="quote-author">
+                        <div class="avatar">М</div>
+                        <div class="author-info">
+                            <h5>Мария</h5>
+                            <span>19 лет</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote-card fade-in">
+                    <p class="quote-text">"Я понял, что могу служить другим и менять мир вокруг себя. ХМОВЕ открыло мне глаза на мое призвание."</p>
+                    <div class="quote-author">
+                        <div class="avatar">Д</div>
+                        <div class="author-info">
+                            <h5>Даниил</h5>
+                            <span>24 года</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="vision">
+        <div class="container fade-in">
+            <h2>Наш взгляд в будущее</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Мы верим, что лучшее - впереди! Мечтай с нами!</p>
+            
+            <div class="vision-grid">
+                <div class="vision-item">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🙏</div>
+                    <h4>Новые города</h4>
+                    <p>Расширение географии движения.</p>
+                </div>
+                <div class="vision-item">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">💡</div>
+                    <h4>Новые проекты</h4>
+                    <p>Инновационные форматы служения.</p>
+                </div>
+                <div class="vision-item">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🚀</div>
+                    <h4>Новые высоты</h4>
+                    <p>Международное сотрудничество.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join CTA -->
+    <section id="join" class="join">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Присоединяйся к нам!</h2>
+                <p>Стать частью ХМОВЕ очень просто. Мы всегда рады новым друзьям и единомышленникам!</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step fade-in">
+                    <span class="step-num">1</span>
+                    <h4>Найди нас в соцсетях</h4>
+                    <p style="color: #666; margin-top: 10px;">Подпишись на наши страницы в Instagram, VK, Telegram. Следи за новостями.</p>
+                </div>
+                <div class="step fade-in">
+                    <span class="step-num">2</span>
+                    <h4>Приходи на встречу</h4>
+                    <p style="color: #666; margin-top: 10px;">Посети ближайшее мероприятие в твоем городе. Почувствуй атмосферу.</p>
+                </div>
+                <div class="step fade-in">
+                    <span class="step-num">3</span>
+                    <h4>Напиши нам</h4>
+                    <p style="color: #666; margin-top: 10px;">Есть вопросы? Свяжись с нами напрямую — мы всегда на связи!</p>
+                </div>
+            </div>
+
+            <div class="fade-in">
+                <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; color: #2d2d2d;">Мы ждем именно тебя!</p>
+                <a href="#" class="btn btn-primary" onclick="alert('Переход в соцсети...')">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem; color: white;">
+                 <!-- ИЗМЕНЕННЫЙ КРЕСТ В ФУТЕРЕ -->
+                 <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
+                    <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
+                </svg>
+                ХМОВЕ
+            </div>
+            <div class="footer-slogan">Твое время. Твоя вера. Твое движение.</div>
+            
+            <div class="footer-links">
+                <a href="#">Instagram</a>
+                <a href="#">VKontakte</a>
+                <a href="#">Telegram</a>
+                <a href="#">YouTube</a>
+            </div>
+
+            <div class="copyright">
+                &copy; 2023 Христианское молодежное объединение веры евангельской. Спасибо за внимание!
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
