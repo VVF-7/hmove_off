@@ -323,7 +323,7 @@
         .video-player {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Меняем cover на contain, чтобы controls не обрезались */
+            object-fit: contain;
             display: block;
         }
 
@@ -421,6 +421,35 @@
             background-color: var(--bg-color);
         }
 
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            background: white;
+            border: 1px solid rgba(123, 44, 191, 0.2);
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-deep);
+            color: white;
+            border-color: var(--accent-deep);
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.3);
+            transform: translateY(-2px);
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -434,6 +463,13 @@
             aspect-ratio: 1 / 1; 
             cursor: pointer;
             box-shadow: var(--shadow);
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .gallery-item.hidden {
+            display: none;
         }
 
         .gallery-item img {
@@ -625,20 +661,44 @@
 
         .footer-links {
             margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            align-items: center;
         }
 
         .footer-links a {
-            margin: 0 15px;
-            color: #aaa;
+            font-size: 1.1rem;
+            color: #fff;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover { color: var(--accent-yellow); }
+        
+        /* Стили для блока телефона с подписью */
+        .phone-contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-label {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.2rem;
+            font-weight: 400;
+        }
 
         .copyright {
             color: #777;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-top: 3rem;
+            word-wrap: break-word;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
         }
 
         /* --- MUSIC PLAYER (Floating Pill) --- */
@@ -868,6 +928,24 @@
                 width: 24px;
                 height: 24px;
             }
+            
+            .gallery-filters {
+                gap: 0.5rem;
+            }
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                gap: 1.5rem;
+                flex-direction: column;
+            }
+            
+            .copyright {
+                padding: 0 10px;
+                font-size: 0.8rem;
+            }
         }
 
         .fade-in {
@@ -999,15 +1077,27 @@
                 <p>Моменты, которые мы запомнили навсегда</p>
             </div>
 
+            <!-- Кнопки-папки (Фильтры) -->
+            <div class="gallery-filters fade-in">
+                <button class="filter-btn active" onclick="filterGallery('all', this)">Все</button>
+                <button class="filter-btn" onclick="filterGallery('conference', this)">Конференции</button>
+                <button class="filter-btn" onclick="filterGallery('camp', this)">Лагерь</button>
+                <button class="filter-btn" onclick="filterGallery('worship', this)">Worship</button>
+                <button class="filter-btn" onclick="filterGallery('friends', this)">Друзья</button>
+            </div>
+
             <div class="gallery-grid fade-in">
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/worship/800/800" alt="Worship"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/friends/800/800" alt="Friends"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/camp/800/800" alt="Camp"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/guitar/800/800" alt="Music"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/bible/800/800" alt="Study"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/smile/800/800" alt="Joy"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/team/800/800" alt="Team"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/pray/800/800" alt="Prayer"></div>
+                <div class="gallery-item" data-category="conference" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/worship/800/800" alt="Conference"></div>
+                <div class="gallery-item" data-category="friends" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/friends/800/800" alt="Friends"></div>
+                <div class="gallery-item" data-category="camp" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/camp/800/800" alt="Camp"></div>
+                <div class="gallery-item" data-category="worship" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/guitar/800/800" alt="Music"></div>
+                <div class="gallery-item" data-category="worship" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/bible/800/800" alt="Study"></div>
+                <div class="gallery-item" data-category="friends" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/smile/800/800" alt="Joy"></div>
+                <div class="gallery-item" data-category="camp" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/team/800/800" alt="Team"></div>
+                <div class="gallery-item" data-category="conference" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/pray/800/800" alt="Prayer"></div>
+                <div class="gallery-item" data-category="worship" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/concert/800/800" alt="Concert"></div>
+                <div class="gallery-item" data-category="camp" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/fire/800/800" alt="Fire"></div>
+                <div class="gallery-item" data-category="friends" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/hug/800/800" alt="Hug"></div>
             </div>
         </div>
     </section>
@@ -1108,17 +1198,22 @@
                 </svg>
                 ХМОВЕ
             </div>
-            <div class="footer-slogan">Твое время. Твоя вера. Твое движение.</div>
+            <div class="footer-slogan">Только с Иисусом!</div>
             
             <div class="footer-links">
-                <a href="#">Instagram</a>
-                <a href="#">VKontakte</a>
-                <a href="#">Telegram</a>
-                <a href="#">YouTube</a>
+                <!-- Telegram -->
+                <a href="https://t.me/hmove_OnlyWithJesus" target="_blank">Telegram</a>
+                
+                <!-- Телефон с подписью -->
+                <div class="phone-contact">
+                    <a href="tel:+79881875593">+7(988)187-55-93</a>
+                    <span class="contact-label">если возникнут вопросы</span>
+                </div>
             </div>
 
             <div class="copyright">
-                &copy; 2023 Христианское молодежное объединение веры евангельской. Спасибо за внимание!
+                МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ ЦЕРКОВЬ ХРИСТИАН ВЕРЫ ЕВАНГЕЛЬСКОЙ "ВИФАНИЯ" Г. СОЧИ<br>
+                ИНН 2319047504 КПП 231801001 ОГРН 1102300000923 от 10.02.2010г.
             </div>
         </div>
     </footer>
@@ -1245,7 +1340,7 @@
             }
         }
         
-        // Опционально: Возвращаем overlay, если видео остановлено
+        // Возвращаем overlay, если видео остановлено
         const videoElement = document.getElementById('promoVideo');
         if(videoElement) {
             videoElement.addEventListener('pause', () => {
@@ -1307,6 +1402,38 @@
         }, observerOptions);
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        // --- 7. Логика Фильтрации Галереи (Папки) ---
+        function filterGallery(category, btnElement) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            const items = document.querySelectorAll('.gallery-item');
+            
+            items.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.classList.remove('hidden');
+                    setTimeout(() => {
+                        item.style.display = 'block';
+                        item.animate([
+                            { opacity: 0, transform: 'scale(0.9)' },
+                            { opacity: 1, transform: 'scale(1)' }
+                        ], {
+                            duration: 300,
+                            fill: 'forwards'
+                        });
+                    }, 50);
+                } else {
+                    item.style.display = 'none';
+                    item.classList.add('hidden');
+                }
+            });
+        }
     </script>
 </body>
 </html>
