@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO и Мета-теги (ПУНКТ 5) -->
+    <!-- SEO и Мета-теги -->
     <title>ХМОВЕ — Только с Иисусом | Христианское молодежное объединение</title>
     <meta name="description" content="ХМОВЕ — Христианское молодежное объединение веры евангельской. Конференции, лагеря, музыка и братство. Только с Иисусом.">
     <meta name="keywords" content="ХМОВЕ, христианская молодежь, вера, Иисус, церковь, молодежные конференции, лагерь, Бог">
@@ -126,7 +126,7 @@
             padding: 0 20px;
         }
 
-        /* --- Header & Burger (ПУНКТ 1) --- */
+        /* --- Header & Burger --- */
         header {
             position: fixed;
             top: 0;
@@ -152,7 +152,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            z-index: 1002; /* выше меню */
+            z-index: 1002; 
         }
         
         .cross-icon-svg {
@@ -187,7 +187,7 @@
 
         .nav-links a:hover { color: var(--accent-primary); }
 
-        /* Кнопка Бургер (скрыта на ПК) */
+        /* Кнопка Бургер */
         .burger {
             display: none;
             flex-direction: column;
@@ -208,7 +208,7 @@
         .mobile-nav {
             position: fixed;
             top: 0;
-            right: -100%; /* скрыто справа */
+            right: -100%; 
             width: 100%;
             height: 100vh;
             background-color: var(--accent-deep);
@@ -236,7 +236,6 @@
             color: var(--accent-yellow);
         }
 
-        /* Анимация бургера в крестик */
         .burger.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 6px);
             background-color: white;
@@ -349,58 +348,7 @@
             top: 4px;
         }
 
-        /* --- Activities --- */
-        .activities {
-            padding: 6rem 0;
-            background-color: var(--bg-secondary);
-        }
-
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .activity-card {
-            position: relative;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .activity-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .activity-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .activity-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(90, 24, 154, 0.95), transparent);
-            padding: 2rem 1.5rem;
-        }
-
-        .activity-overlay h4 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .activity-overlay p {
-            font-size: 0.9rem;
-            color: #eee;
-        }
-
-        /* --- GALLERY SECTION (ПУНКТ 4) --- */
+        /* --- GALLERY SECTION --- */
         .gallery {
             padding: 6rem 0;
             background-color: var(--bg-color);
@@ -416,7 +364,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            aspect-ratio: 1 / 1; /* Квадратные фото */
+            aspect-ratio: 1 / 1; 
             cursor: pointer;
         }
 
@@ -431,7 +379,7 @@
             transform: scale(1.08);
         }
 
-        /* --- EVENTS SECTION (ПУНКТ 4) --- */
+        /* --- EVENTS SECTION --- */
         .events {
             padding: 6rem 0;
             background-color: var(--bg-secondary);
@@ -683,7 +631,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 2000; /* Ниже мобильного меню */
+            z-index: 2000;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
         }
@@ -785,15 +733,11 @@
             .hero-main-title { font-size: 4rem; letter-spacing: 5px; }
             .hero h1 { font-size: 2.5rem; }
             
-            /* Показываем бургер */
             .burger { display: flex; }
-            
-            /* Скрываем десктопное меню */
             .nav-links, .nav-btn-desktop { display: none; }
 
             .section-header h2 { font-size: 1.8rem; }
             
-            /* Адаптив карточек событий */
             .event-card { flex-direction: column; }
             .event-date { flex-direction: row; gap: 10px; padding: 1rem; min-width: auto; }
             .event-date .day { font-size: 1.5rem; }
@@ -834,17 +778,15 @@
                     ХМОВЕ
                 </div>
                 
-                <!-- Десктопное меню -->
+                <!-- Десктопное меню (Ссылка на activity удалена) -->
                 <div class="nav-links">
                     <a href="#mission">О нас</a>
                     <a href="#mission">Миссия</a>
-                    <a href="#activity">Деятельность</a>
                     <a href="#gallery">Галерея</a>
                     <a href="#events">События</a>
                     <a href="#join">Вступить</a>
                 </div>
                 
-                <!-- Кнопка Вступить (только на ПК) -->
                 <a href="#join" class="btn btn-primary nav-btn-desktop">Вступить</a>
 
                 <!-- Кнопка Бургер -->
@@ -857,10 +799,9 @@
         </div>
     </header>
 
-    <!-- Мобильное меню (выезжает справа) -->
+    <!-- Мобильное меню (Ссылка на activity удалена) -->
     <div class="mobile-nav" id="mobileNav">
         <a href="#mission" class="mobile-link">Миссия</a>
-        <a href="#activity" class="mobile-link">Деятельность</a>
         <a href="#gallery" class="mobile-link">Галерея</a>
         <a href="#events" class="mobile-link">События</a>
         <a href="#join" class="mobile-link">Вступить</a>
@@ -922,55 +863,7 @@
         </div>
     </section>
 
-    <!-- Activities -->
-    <section id="activity" class="activities">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2>Жизнь в движении</h2>
-                <p>Мы не стоим на месте. Вот чем мы живем:</p>
-            </div>
-
-            <div class="activity-grid">
-                <div class="activity-card fade-in">
-                    <img src="https://picsum.photos/seed/conference/400/500" alt="Конференции">
-                    <div class="activity-overlay">
-                        <h4>Молодежные конференции</h4>
-                        <p>Масштабные встречи для духовного роста и обмена опытом.</p>
-                    </div>
-                </div>
-                <div class="activity-card fade-in">
-                    <img src="https://picsum.photos/seed/campfire/400/500" alt="Лагеря">
-                    <div class="activity-overlay">
-                        <h4>Летние лагеря</h4>
-                        <p>Незабываемые каникулы с Богом и новыми друзьями.</p>
-                    </div>
-                </div>
-                <div class="activity-card fade-in">
-                    <img src="https://picsum.photos/seed/charity/400/500" alt="Социальные проекты">
-                    <div class="activity-overlay">
-                        <h4>Социальные проекты</h4>
-                        <p>Помощь нуждающимся и служение обществу.</p>
-                    </div>
-                </div>
-                <div class="activity-card fade-in">
-                    <img src="https://picsum.photos/seed/concert/400/500" alt="Музыка">
-                    <div class="activity-overlay">
-                        <h4>Музыкальные фестивали</h4>
-                        <p>Прославление через современную христианскую музыку.</p>
-                    </div>
-                </div>
-                <div class="activity-card fade-in">
-                    <img src="https://picsum.photos/seed/road/400/500" alt="Туры">
-                    <div class="activity-overlay">
-                        <h4>Евангелизационные туры</h4>
-                        <p>Распространение Благой Вести в разных городах.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GALLERY SECTION (ПУНКТ 4: ГАЛЕРЕЯ) -->
+    <!-- GALLERY SECTION -->
     <section id="gallery" class="gallery">
         <div class="container">
             <div class="section-header fade-in">
@@ -979,7 +872,6 @@
             </div>
 
             <div class="gallery-grid fade-in">
-                <!-- Замени src на ссылки на реальные фото -->
                 <div class="gallery-item"><img src="https://picsum.photos/seed/worship/500/500" alt="Worship"></div>
                 <div class="gallery-item"><img src="https://picsum.photos/seed/friends/500/500" alt="Friends"></div>
                 <div class="gallery-item"><img src="https://picsum.photos/seed/camp/500/500" alt="Camp"></div>
@@ -992,7 +884,7 @@
         </div>
     </section>
 
-    <!-- EVENTS SECTION (ПУНКТ 4: АФИША) -->
+    <!-- EVENTS SECTION -->
     <section id="events" class="events">
         <div class="container">
             <div class="section-header fade-in">
@@ -1208,17 +1100,15 @@
 
     <!-- Scripts -->
     <script>
-        // --- 1. Логика Бургер-Меню (ПУНКТ 1) ---
+        // --- 1. Логика Бургер-Меню ---
         const burgerBtn = document.getElementById('burgerBtn');
         const mobileNav = document.getElementById('mobileNav');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Открытие/закрытие меню
         burgerBtn.addEventListener('click', () => {
             burgerBtn.classList.toggle('active');
             mobileNav.classList.toggle('active');
             
-            // Блокируем прокрутку страницы, когда меню открыто
             if(mobileNav.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -1226,7 +1116,6 @@
             }
         });
 
-        // Закрытие меню при клике на ссылку
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 burgerBtn.classList.remove('active');
