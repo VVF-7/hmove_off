@@ -453,6 +453,7 @@
             font-size: 0.9rem;
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .event-meta span {
@@ -895,7 +896,7 @@
         </div>
     </section>
 
-    <!-- EVENTS SECTION -->
+    <!-- EVENTS SECTION (Обновлено) -->
     <section id="events" class="events">
         <div class="container">
             <div class="section-header fade-in">
@@ -904,48 +905,24 @@
             </div>
 
             <div class="events-list">
-                <!-- Событие 1 -->
+                <!-- Новое Событие 1 -->
                 <div class="event-card fade-in">
                     <div class="event-date">
-                        <span class="day">15</span>
-                        <span class="month">НОЯ</span>
+                        <!-- Уменьшил размер шрифта, чтобы влезло "27-30" -->
+                        <span class="day" style="font-size: 1.8rem; line-height: 1;">27-30</span>
+                        <span class="month">ОКТ</span>
                     </div>
                     <div class="event-info">
-                        <h3>Молодежная служение "Огонь"</h3>
+                        <h3>Молодежная встреча "Двоим лучше, нежели одному"</h3>
                         <div class="event-meta">
-                            <span>📍 Церковь "Благодать", 18:00</span>
+                            <span>📍 Краснодар</span>
+                            <span>📅 Октябрь 2026</span>
                         </div>
-                        <p>Особая время прославления и проповеди. Тема: "Сила веры в действии". Приходи с друзьями!</p>
-                    </div>
-                </div>
-
-                <!-- Событие 2 -->
-                <div class="event-card fade-in">
-                    <div class="event-date">
-                        <span class="day">22</span>
-                        <span class="month">НОЯ</span>
-                    </div>
-                    <div class="event-info">
-                        <h3>Мастер-класс: Творчество</h3>
-                        <div class="event-meta">
-                            <span>📍 Художественная студия, 14:00</span>
+                        <p>3 дня об отношениях, браке и семье. Время, когда мы вместе ищем Божий план для наших отношений — между мужем и женой, родителями и детьми, друзьями.</p>
+                        <!-- Стилизация для стиха -->
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--accent-deep); font-weight: 700; text-align: center; font-style: italic;">
+                            Екклесиаст 4:9
                         </div>
-                        <p>Учимся видеть красоту творения Божьего и выражать её через искусство. Для всех желающих!</p>
-                    </div>
-                </div>
-
-                <!-- Событие 3 -->
-                <div class="event-card fade-in">
-                    <div class="event-date">
-                        <span class="day">01</span>
-                        <span class="month">ДЕК</span>
-                    </div>
-                    <div class="event-info">
-                        <h3>Подготовка к Рождеству</h3>
-                        <div class="event-meta">
-                            <span>📍 Онлайн (Zoom), 20:00</span>
-                        </div>
-                        <p>Онлайн-встреча для организации елки и подарков детям. Планируем и молимся вместе.</p>
                     </div>
                 </div>
             </div>
