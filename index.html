@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ХМОВЕ — Только с Иисусом</title>
+    
+    <!-- SEO и Мета-теги (ПУНКТ 5) -->
+    <title>ХМОВЕ — Только с Иисусом | Христианское молодежное объединение</title>
+    <meta name="description" content="ХМОВЕ — Христианское молодежное объединение веры евангельской. Конференции, лагеря, музыка и братство. Только с Иисусом.">
+    <meta name="keywords" content="ХМОВЕ, христианская молодежь, вера, Иисус, церковь, молодежные конференции, лагерь, Бог">
+    <meta property="og:title" content="ХМОВЕ — Только с Иисусом">
+    <meta property="og:description" content="Объединение молодых, горящих сердец. Присоединяйся к движению!">
+    <meta property="og:image" content="https://picsum.photos/seed/conference/1200/630">
+    <meta property="og:type" content="website">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS Переменные (СВЕТЛАЯ ТЕМА + ЖЕЛТЫЕ АКЦЕНТЫ) --- */
+        /* --- CSS Переменные --- */
         :root {
-            /* Светлые тона фона */
-            --bg-color: #f8f4fd; /* Очень светлая лаванда */
-            --bg-secondary: #ffffff; /* Чистый белый */
-            --text-color: #2d2d2d; /* Темно-серый текст */
+            --bg-color: #f8f4fd;
+            --bg-secondary: #ffffff;
+            --text-color: #2d2d2d;
             --text-muted: #666666;
             
-            /* Сиреневая палитра */
-            --accent-primary: #9d4edd; /* Сирень */
-            --accent-deep: #7b2cbf;    /* Глубокий фиолетовый */
+            --accent-primary: #9d4edd;
+            --accent-deep: #7b2cbf;
+            --accent-yellow: #ffcc00;
             
-            /* Желтый акцент */
-            --accent-yellow: #ffcc00;  /* Яркий желтый */
-            
-            /* Градиенты */
-            --gradient-main: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%); /* Желтый для кнопок */
+            --gradient-main: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
             --gradient-text: linear-gradient(to right, #7b2cbf, #9d4edd);
             
             --card-bg: #ffffff;
-            --shadow: 0 10px 30px rgba(123, 44, 191, 0.1); /* Мягкая тень */
+            --shadow: 0 10px 30px rgba(123, 44, 191, 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -48,7 +52,6 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Отступ снизу уменьшен, так как плеер стал ниже */
             padding-bottom: 60px; 
         }
 
@@ -103,7 +106,7 @@
             border: none;
             font-size: 0.9rem;
             letter-spacing: 1px;
-            color: #2d2d2d; /* Темный текст на желтой кнопке */
+            color: #2d2d2d;
         }
 
         .btn-primary {
@@ -123,17 +126,16 @@
             padding: 0 20px;
         }
 
-        /* --- Header --- */
+        /* --- Header & Burger (ПУНКТ 1) --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            /* Очень прозрачный белый фон */
-            background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(5px); /* Легкое размытие для читаемости текста */
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03); /* Почти невидимая граница */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         nav {
@@ -150,39 +152,26 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1002; /* выше меню */
         }
         
-        /* Стили для иконки креста */
         .cross-icon-svg {
             width: 28px;
             height: 28px;
         }
 
-        /* Анимация применяется к элементу с классом cross-path */
         .cross-path {
-            /* Анимация цвета и пульсации */
             animation: pulseAndGlow 3s infinite ease-in-out;
             transform-origin: center;
         }
 
         @keyframes pulseAndGlow {
-            0% {
-                fill: var(--accent-primary); /* Фиолетовый */
-                transform: scale(1);
-                filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0));
-            }
-            50% {
-                fill: var(--accent-yellow); /* Желтый */
-                transform: scale(1.15); /* Увеличение (пульсация) */
-                filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.6)); /* Свечение */
-            }
-            100% {
-                fill: var(--accent-primary); /* Возврат к фиолетовому */
-                transform: scale(1);
-                filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0));
-            }
+            0% { fill: var(--accent-primary); transform: scale(1); filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0)); }
+            50% { fill: var(--accent-yellow); transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.6)); }
+            100% { fill: var(--accent-primary); transform: scale(1); filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0)); }
         }
 
+        /* Десктопное меню */
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -198,14 +187,75 @@
 
         .nav-links a:hover { color: var(--accent-primary); }
 
-        /* --- Hero Section (ЧИСТЫЙ ФОН) --- */
+        /* Кнопка Бургер (скрыта на ПК) */
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1002;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent-deep);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Мобильное меню */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%; /* скрыто справа */
+            width: 100%;
+            height: 100vh;
+            background-color: var(--accent-deep);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Анимация бургера в крестик */
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+            background-color: white;
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+            background-color: white;
+        }
+
+        /* --- Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* Убрано url(...), оставлен чистый градиент */
             background: linear-gradient(180deg, #f3e5f5 0%, #ffffff 100%);
             padding: 0 20px;
             position: relative;
@@ -252,9 +302,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
-        /* --- Intro / Values (Секция полностью удалена) --- */
-
 
         /* --- Mission Section --- */
         .mission {
@@ -338,7 +385,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(90, 24, 154, 0.95), transparent); /* Фиолетовый градиент */
+            background: linear-gradient(to top, rgba(90, 24, 154, 0.95), transparent);
             padding: 2rem 1.5rem;
         }
 
@@ -351,6 +398,119 @@
         .activity-overlay p {
             font-size: 0.9rem;
             color: #eee;
+        }
+
+        /* --- GALLERY SECTION (ПУНКТ 4) --- */
+        .gallery {
+            padding: 6rem 0;
+            background-color: var(--bg-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 1 / 1; /* Квадратные фото */
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* --- EVENTS SECTION (ПУНКТ 4) --- */
+        .events {
+            padding: 6rem 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.15);
+        }
+
+        .event-date {
+            background: var(--accent-deep);
+            color: var(--accent-yellow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .event-date .day {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .event-info {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-deep);
+            font-size: 1.4rem;
+        }
+
+        .event-meta {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* --- Testimonials --- */
@@ -380,7 +540,7 @@
             position: absolute;
             top: -20px;
             left: 20px;
-            color: var(--accent-yellow); /* Желтая кавычка */
+            color: var(--accent-yellow);
             opacity: 0.5;
             font-family: serif;
         }
@@ -403,7 +563,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--gradient-main); /* Желтый аватар */
+            background: var(--gradient-main);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -414,10 +574,9 @@
         .author-info h5 { color: #2d2d2d; margin-bottom: 0.2rem; }
         .author-info span { font-size: 0.8rem; color: var(--text-muted); }
 
-        /* --- Future / Vision (ЧИСТЫЙ ФОН) --- */
+        /* --- Vision --- */
         .vision {
             padding: 6rem 0;
-            /* Убрано фоновое изображение, добавлен сплошной цвет */
             background-color: var(--accent-deep); 
             text-align: center;
             color: white;
@@ -432,7 +591,7 @@
         }
 
         .vision-item h4 {
-            color: var(--accent-yellow); /* Желтый заголовок */
+            color: var(--accent-yellow);
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
@@ -472,7 +631,7 @@
             width: 40px;
             height: 40px;
             line-height: 40px;
-            background: var(--accent-yellow); /* Желтый кружок */
+            background: var(--accent-yellow);
             border-radius: 50%;
             font-weight: bold;
             margin-bottom: 1rem;
@@ -481,11 +640,11 @@
 
         /* --- Footer --- */
         footer {
-            background: #2d2d2d; /* Темный футер для контраста */
+            background: #2d2d2d;
             padding: 4rem 0 2rem;
             text-align: center;
             color: #ccc;
-            margin-bottom: 70px; /* Отступ уменьшен под компактный плеер */
+            margin-bottom: 70px;
         }
 
         .footer-slogan {
@@ -513,19 +672,18 @@
             margin-top: 3rem;
         }
 
-        /* --- MUSIC PLAYER STYLES (КОМПАКТНЫЙ) --- */
+        /* --- MUSIC PLAYER --- */
         .music-player {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             background: var(--accent-deep);
-            /* Уменьшены отступы */
             padding: 8px 20px; 
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 2000;
+            z-index: 2000; /* Ниже мобильного меню */
             box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
         }
@@ -574,11 +732,10 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 4px; /* Уменьшен отступ */
+            margin-bottom: 4px;
         }
 
         .play-btn {
-            /* Уменьшен размер кнопки */
             width: 32px; 
             height: 32px;
             border-radius: 50%;
@@ -592,25 +749,13 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
-        .play-btn:hover {
-            transform: scale(1.1);
-        }
+        .play-btn:hover { transform: scale(1.1); }
 
-        .play-btn svg {
-            /* Уменьшен размер иконки */
-            width: 14px; 
-            height: 14px;
-            fill: #2d2d2d;
-            margin-left: 1px; 
-        }
-        
-        .play-btn.playing svg {
-            margin-left: 0;
-        }
+        .play-btn svg { width: 14px; height: 14px; fill: #2d2d2d; margin-left: 1px; }
+        .play-btn.playing svg { margin-left: 0; }
 
         .progress-container {
             width: 100%;
-            /* Уменьшена высота полосы */
             height: 4px; 
             background: rgba(255,255,255,0.2);
             border-radius: 2px;
@@ -630,27 +775,35 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            font-size: 0.7rem; /* Чуть мельче текст */
+            font-size: 0.7rem;
             color: rgba(255,255,255,0.7);
-            margin-top: 2px; /* Уменьшен отступ */
+            margin-top: 2px;
         }
 
         /* --- Media Queries --- */
         @media (max-width: 768px) {
             .hero-main-title { font-size: 4rem; letter-spacing: 5px; }
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            .section-header h2 { font-size: 1.8rem; }
-            .mission-grid { grid-template-columns: 1rem; }
             
-            /* Mobile Player Adjustments */
-            .track-details { display: none; } /* Скрываем текст на очень маленьких экранах */
+            /* Показываем бургер */
+            .burger { display: flex; }
+            
+            /* Скрываем десктопное меню */
+            .nav-links, .nav-btn-desktop { display: none; }
+
+            .section-header h2 { font-size: 1.8rem; }
+            
+            /* Адаптив карточек событий */
+            .event-card { flex-direction: column; }
+            .event-date { flex-direction: row; gap: 10px; padding: 1rem; min-width: auto; }
+            .event-date .day { font-size: 1.5rem; }
+            
+            .track-details { display: none; }
             .music-player { padding: 6px 15px; }
             .play-btn { width: 28px; height: 28px; }
             .play-btn svg { width: 12px; height: 12px; }
         }
 
-        /* Animation classes */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -674,24 +827,44 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <!-- ИЗМЕНЕННЫЙ КРЕСТ: Закругленный, современный стиль -->
                     <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
                         <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
                     </svg>
                     ХМОВЕ
                 </div>
+                
+                <!-- Десктопное меню -->
                 <div class="nav-links">
-                    <!-- Ссылка "О нас" теперь никуда не ведет или ведет в миссию -->
                     <a href="#mission">О нас</a>
                     <a href="#mission">Миссия</a>
                     <a href="#activity">Деятельность</a>
+                    <a href="#gallery">Галерея</a>
+                    <a href="#events">События</a>
                     <a href="#join">Вступить</a>
                 </div>
-                <a href="#join" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Вступить</a>
+                
+                <!-- Кнопка Вступить (только на ПК) -->
+                <a href="#join" class="btn btn-primary nav-btn-desktop">Вступить</a>
+
+                <!-- Кнопка Бургер -->
+                <div class="burger" id="burgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
     </header>
+
+    <!-- Мобильное меню (выезжает справа) -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#mission" class="mobile-link">Миссия</a>
+        <a href="#activity" class="mobile-link">Деятельность</a>
+        <a href="#gallery" class="mobile-link">Галерея</a>
+        <a href="#events" class="mobile-link">События</a>
+        <a href="#join" class="mobile-link">Вступить</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -703,8 +876,6 @@
             <a href="#mission" class="btn btn-primary">Узнать больше</a>
         </div>
     </section>
-
-    <!-- About / Values (РАЗДЕЛ ПОЛНОСТЬЮ УДАЛЕН) -->
 
     <!-- Mission -->
     <section id="mission" class="mission">
@@ -799,6 +970,85 @@
         </div>
     </section>
 
+    <!-- GALLERY SECTION (ПУНКТ 4: ГАЛЕРЕЯ) -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Фотоотчеты</h2>
+                <p>Моменты, которые мы запомнили навсегда</p>
+            </div>
+
+            <div class="gallery-grid fade-in">
+                <!-- Замени src на ссылки на реальные фото -->
+                <div class="gallery-item"><img src="https://picsum.photos/seed/worship/500/500" alt="Worship"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/friends/500/500" alt="Friends"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/camp/500/500" alt="Camp"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/guitar/500/500" alt="Music"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/bible/500/500" alt="Study"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/smile/500/500" alt="Joy"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/team/500/500" alt="Team"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/pray/500/500" alt="Prayer"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION (ПУНКТ 4: АФИША) -->
+    <section id="events" class="events">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Ближайшие события</h2>
+                <p>Не пропусти наши встречи!</p>
+            </div>
+
+            <div class="events-list">
+                <!-- Событие 1 -->
+                <div class="event-card fade-in">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">НОЯ</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Молодежная служение "Огонь"</h3>
+                        <div class="event-meta">
+                            <span>📍 Церковь "Благодать", 18:00</span>
+                        </div>
+                        <p>Особая время прославления и проповеди. Тема: "Сила веры в действии". Приходи с друзьями!</p>
+                    </div>
+                </div>
+
+                <!-- Событие 2 -->
+                <div class="event-card fade-in">
+                    <div class="event-date">
+                        <span class="day">22</span>
+                        <span class="month">НОЯ</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Мастер-класс: Творчество</h3>
+                        <div class="event-meta">
+                            <span>📍 Художественная студия, 14:00</span>
+                        </div>
+                        <p>Учимся видеть красоту творения Божьего и выражать её через искусство. Для всех желающих!</p>
+                    </div>
+                </div>
+
+                <!-- Событие 3 -->
+                <div class="event-card fade-in">
+                    <div class="event-date">
+                        <span class="day">01</span>
+                        <span class="month">ДЕК</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Подготовка к Рождеству</h3>
+                        <div class="event-meta">
+                            <span>📍 Онлайн (Zoom), 20:00</span>
+                        </div>
+                        <p>Онлайн-встреча для организации елки и подарков детям. Планируем и молимся вместе.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
@@ -809,7 +1059,7 @@
 
             <div class="testimonials-grid">
                 <div class="quote-card fade-in">
-                    <p class="quote-text">"В 2020 году я пришла на ХМОВЕ случайно. Не ждала ничего особенного — просто пришла. Но со временем поняла: случайностей не бывает. Это больше, чем движение. Это дом. Это семья — с общей историей, добрыми традициями и любовью ко Христу, которая связывает нас крепче любых уз. Это счастье — быть частью. Присоединяйся и ты, будет здорово!"</p>
+                    <p class="quote-text">"В 2020 году я пришла на ХМОВЕ случайно. Не ждала ничего особенного — просто пришла. Но со временем поняла: случайностей не бывает. Это больше, чем движение. Это дом. Это семья — с общей историей, добрыми традициями и любовью ко Христу, которая связывает нас крепче любых уз."</p>
                     <div class="quote-author">
                         <div class="avatar">В</div>
                         <div class="author-info">
@@ -905,7 +1155,6 @@
     <footer>
         <div class="container">
             <div class="logo" style="margin-bottom: 1rem; color: white;">
-                 <!-- ИЗМЕНЕННЫЙ КРЕСТ В ФУТЕРЕ -->
                  <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
                     <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
@@ -940,9 +1189,7 @@
         <div class="player-controls">
             <div class="control-buttons">
                 <button class="play-btn" id="playBtn">
-                    <!-- Play Icon -->
                     <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <!-- Pause Icon (Hidden by default) -->
                     <svg id="pauseIcon" style="display:none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 </button>
             </div>
@@ -957,16 +1204,38 @@
     </div>
 
     <!-- AUDIO ELEMENT -->
-    <!-- 
-      ВАЖНО: 
-      Положите ваш аудиофайл в ту же папку, где лежит этот HTML файл, и назовите его "music.mp3".
-      Либо измените src ниже на ссылку на ваш файл.
-    -->
     <audio id="audio-player" src="music.mp3"></audio>
 
     <!-- Scripts -->
     <script>
-        // --- Логика Музыкального Плеера ---
+        // --- 1. Логика Бургер-Меню (ПУНКТ 1) ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Открытие/закрытие меню
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            
+            // Блокируем прокрутку страницы, когда меню открыто
+            if(mobileNav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Закрытие меню при клике на ссылку
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // --- 2. Логика Музыкального Плеера ---
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -976,7 +1245,6 @@
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
 
-        // Форматирование времени (секунды в ММ:СС)
         function formatTime(seconds) {
             if (isNaN(seconds)) return "0:00";
             const mins = Math.floor(seconds / 60);
@@ -984,16 +1252,11 @@
             return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
-        // Кнопка Play/Pause
         playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
+            if (audio.paused) audio.play();
+            else audio.pause();
         });
 
-        // Обновление иконок при воспроизведении/паузе
         audio.addEventListener('play', () => {
             playIcon.style.display = 'none';
             pauseIcon.style.display = 'block';
@@ -1006,7 +1269,6 @@
             playBtn.classList.remove('playing');
         });
 
-        // Обновление прогресс-бара и времени
         audio.addEventListener('timeupdate', () => {
             const { currentTime, duration } = audio;
             const progressPercent = (currentTime / duration) * 100;
@@ -1014,12 +1276,10 @@
             currentTimeEl.textContent = formatTime(currentTime);
         });
 
-        // Получение длительности трека после загрузки метаданных
         audio.addEventListener('loadedmetadata', () => {
             durationEl.textContent = formatTime(audio.duration);
         });
 
-        // Клик по прогресс-бару для перемотки
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
@@ -1028,9 +1288,7 @@
         });
 
 
-        // --- Общая логика сайта ---
-
-        // Smooth scroll for navigation links
+        // --- 3. Общая логика сайта ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1047,7 +1305,7 @@
             });
         });
 
-        // Simple Intersection Observer for scroll animations
+        // Scroll Animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: "0px 0px -50px 0px"
