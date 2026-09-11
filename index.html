@@ -592,7 +592,7 @@
             padding: 4rem 0 2rem;
             text-align: center;
             color: #ccc;
-            margin-bottom: 70px;
+            margin-bottom: 100px; /* Увеличил отступ, так как плеер теперь висит выше */
         }
 
         .footer-slogan {
@@ -620,112 +620,140 @@
             margin-top: 3rem;
         }
 
-        /* --- MUSIC PLAYER --- */
+        /* --- НОВЫЙ MUSIC PLAYER (Floating Pill) --- */
         .music-player {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--accent-deep);
-            padding: 8px 20px; 
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.85); /* Белый полупрозрачный */
+            backdrop-filter: blur(15px); /* Эффект матового стекла */
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px; /* Закругления как у таблетки */
+            padding: 10px 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Мягкая тень */
             z-index: 2000;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .music-player:hover {
+            transform: translateX(-50%) translateY(-2px); /* Легкое поднятие при наведении */
         }
 
-        .track-info {
+        /* Левая часть: Иконка и текст */
+        .player-left {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: white;
-            min-width: 120px;
+            gap: 12px;
         }
 
-        .track-icon {
-            width: 30px;
-            height: 30px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 6px;
+        .disk-icon {
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
         }
 
-        .track-details h4 {
-            font-size: 0.8rem;
-            margin: 0;
-            color: var(--accent-yellow);
+        /* Анимация вращения при воспроизведении */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .track-details p {
-            font-size: 0.7rem;
-            margin: 0;
-            opacity: 0.8;
+        .music-player.playing .disk-icon {
+            animation: spin 4s linear infinite;
         }
 
-        .player-controls {
+        .track-text {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            flex: 1;
-            max-width: 600px;
-            margin: 0 15px;
         }
 
-        .control-buttons {
+        .track-text h4 {
+            font-size: 0.85rem;
+            color: #2d2d2d;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .track-text p {
+            font-size: 0.7rem;
+            color: #777;
+            margin: 0;
+        }
+
+        /* Центральная часть: Кнопка */
+        .player-center {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 4px;
         }
 
-        .play-btn {
-            width: 32px; 
-            height: 32px;
-            border-radius: 50%;
-            background: var(--accent-yellow);
+        .ctrl-btn {
+            background: var(--accent-deep);
             border: none;
-            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
             transition: transform 0.2s;
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(123, 44, 191, 0.3);
         }
 
-        .play-btn:hover { transform: scale(1.1); }
+        .ctrl-btn:hover {
+            transform: scale(1.1);
+        }
 
-        .play-btn svg { width: 14px; height: 14px; fill: #2d2d2d; margin-left: 1px; }
-        .play-btn.playing svg { margin-left: 0; }
+        .ctrl-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+            margin-left: 2px; /* Визуальная коррекция треугольника плей */
+        }
+        
+        .ctrl-btn .icon-pause {
+            margin-left: 0;
+        }
 
-        .progress-container {
+        /* Правая часть: Прогресс */
+        .player-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            width: 80px;
+        }
+
+        .progress-line {
             width: 100%;
-            height: 4px; 
-            background: rgba(255,255,255,0.2);
+            height: 4px;
+            background: rgba(0,0,0,0.1);
             border-radius: 2px;
             cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
 
-        .progress-bar {
+        .progress-fill {
             height: 100%;
             background: var(--accent-yellow);
-            border-radius: 2px;
             width: 0%;
+            border-radius: 2px;
             transition: width 0.1s linear;
         }
 
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.7);
-            margin-top: 2px;
+        .time {
+            font-size: 0.65rem;
+            color: #888;
+            font-weight: 600;
         }
 
         /* --- Media Queries --- */
@@ -742,10 +770,20 @@
             .event-date { flex-direction: row; gap: 10px; padding: 1rem; min-width: auto; }
             .event-date .day { font-size: 1.5rem; }
             
-            .track-details { display: none; }
-            .music-player { padding: 6px 15px; }
-            .play-btn { width: 28px; height: 28px; }
-            .play-btn svg { width: 12px; height: 12px; }
+            /* Мобильная адаптация плеера */
+            .music-player {
+                width: 95%;
+                bottom: 15px;
+                padding: 8px 15px;
+            }
+            
+            .track-text p {
+                display: none; /* Скрываем артиста на очень узких экранах */
+            }
+            
+            .player-right {
+                width: 60px;
+            }
         }
 
         .fade-in {
@@ -778,7 +816,7 @@
                     ХМОВЕ
                 </div>
                 
-                <!-- Десктопное меню (Ссылка на activity удалена) -->
+                <!-- Десктопное меню -->
                 <div class="nav-links">
                     <a href="#mission">О нас</a>
                     <a href="#mission">Миссия</a>
@@ -799,7 +837,7 @@
         </div>
     </header>
 
-    <!-- Мобильное меню (Ссылка на activity удалена) -->
+    <!-- Мобильное меню -->
     <div class="mobile-nav" id="mobileNav">
         <a href="#mission" class="mobile-link">Миссия</a>
         <a href="#gallery" class="mobile-link">Галерея</a>
@@ -1068,30 +1106,28 @@
         </div>
     </footer>
 
-    <!-- MUSIC PLAYER UI -->
-    <div class="music-player">
-        <div class="track-info">
-            <div class="track-icon">🎵</div>
-            <div class="track-details">
+    <!-- НОВЫЙ MUSIC PLAYER UI -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-left">
+            <div class="disk-icon">🎵</div>
+            <div class="track-text">
                 <h4>ХМОВЕ Worship</h4>
                 <p>Только с Иисусом</p>
             </div>
         </div>
         
-        <div class="player-controls">
-            <div class="control-buttons">
-                <button class="play-btn" id="playBtn">
-                    <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    <svg id="pauseIcon" style="display:none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                </button>
+        <div class="player-center">
+            <button class="ctrl-btn" id="playBtn">
+                <svg id="playIcon" class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="pauseIcon" class="icon-pause" style="display:none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+        </div>
+        
+        <div class="player-right">
+            <div class="progress-line" id="progressContainer">
+                <div class="progress-fill" id="progressBar"></div>
             </div>
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="time-display">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
-            </div>
+            <span id="currentTime" class="time">0:00</span>
         </div>
     </div>
 
@@ -1124,7 +1160,7 @@
             });
         });
 
-        // --- 2. Логика Музыкального Плеера ---
+        // --- 2. Логика Музыкального Плеера (Обновлена под новый дизайн) ---
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -1132,7 +1168,7 @@
         const progressBar = document.getElementById('progressBar');
         const progressContainer = document.getElementById('progressContainer');
         const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
+        const musicPlayer = document.getElementById('musicPlayer'); // Для класса playing
 
         function formatTime(seconds) {
             if (isNaN(seconds)) return "0:00";
@@ -1149,24 +1185,25 @@
         audio.addEventListener('play', () => {
             playIcon.style.display = 'none';
             pauseIcon.style.display = 'block';
-            playBtn.classList.add('playing');
+            musicPlayer.classList.add('playing'); // Добавляем класс для вращения иконки
         });
 
         audio.addEventListener('pause', () => {
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
-            playBtn.classList.remove('playing');
+            musicPlayer.classList.remove('playing'); // Убираем класс
         });
 
         audio.addEventListener('timeupdate', () => {
             const { currentTime, duration } = audio;
+            if(isNaN(duration)) return;
             const progressPercent = (currentTime / duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
             currentTimeEl.textContent = formatTime(currentTime);
         });
 
         audio.addEventListener('loadedmetadata', () => {
-            durationEl.textContent = formatTime(audio.duration);
+            // durationEl.textContent = formatTime(audio.duration); // Убрал вывод полной длительности для экономии места в новом дизайне
         });
 
         progressContainer.addEventListener('click', (e) => {
