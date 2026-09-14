@@ -30,15 +30,87 @@
         @keyframes pulse { 0% { fill: var(--accent-primary); } 50% { fill: var(--accent-yellow); } 100% { fill: var(--accent-primary); } }
 
         /* Gallery Styles */
-        .section-header { text-align: center; margin-bottom: 4rem; padding-top: 120px; }
+        .section-header { text-align: center; margin-bottom: 2rem; padding-top: 120px; }
         .section-header h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .section-header p { color: #666; }
         .back-link { display: inline-block; margin-bottom: 1rem; color: var(--accent-deep); font-weight: 600; }
 
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-        .gallery-item { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 1 / 1; cursor: pointer; box-shadow: var(--shadow); transition: transform 0.3s; }
-        .gallery-item:hover { transform: translateY(-5px); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        /* Slider Container */
+        .gallery-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--accent-deep);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+            font-size: 1.5rem;
+            padding-bottom: 4px;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent-primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.left { left: 0; }
+        .slider-btn.right { right: 0; }
+
+        /* The Scroll Track */
+        .gallery-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 10px 60px; /* Padding for buttons */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Скрываем скроллбар для красоты */
+        }
+
+        .gallery-item {
+            flex: 0 0 300px; /* Ширина карточки */
+            aspect-ratio: 1 / 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            scroll-snap-align: center;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Mobile tweak for slider items */
+        @media (max-width: 768px) {
+            .gallery-item { flex: 0 0 85%; } /* Занимаем почти весь экран на мобильном */
+            .gallery-slider { padding: 10px 20px; }
+        }
 
         /* Lightbox Styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; backdrop-filter: blur(5px); }
@@ -66,116 +138,121 @@
             <div class="section-header">
                 <a href="index.html#gallery" class="back-link">← Назад к категориям</a>
                 <h2>Фото</h2>
-                <p>Лучшие моменты наших встреч</p>
+                <p>Листайте фотографии, используя стрелки или свайп</p>
             </div>
 
-            <div class="gallery-grid">
-                <!-- ФОТО 21 (Самая новая) -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo21.jpg" alt="Фото 21">
-                </div>
-
-                <!-- ФОТО 20 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo20.jpg" alt="Фото 20">
-                </div>
-
-                <!-- ФОТО 19 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo19.jpg" alt="Фото 19">
-                </div>
-
-                <!-- ФОТО 18 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo18.jpg" alt="Фото 18">
-                </div>
-
-                <!-- ФОТО 17 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo17.jpg" alt="Фото 17">
-                </div>
-
-                <!-- ФОТО 16 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo16.jpg" alt="Фото 16">
-                </div>
-
-                <!-- ФОТО 15 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo15.jpg" alt="Фото 15">
-                </div>
-
-                <!-- ФОТО 14 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo14.jpg" alt="Фото 14">
-                </div>
-
-                <!-- ФОТО 13 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo13.jpg" alt="Фото 13">
-                </div>
-
-                <!-- ФОТО 12 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo12.jpg" alt="Фото 12">
-                </div>
-
-                <!-- СТАРЫЕ ФОТО -->
-
-                <!-- ФОТО 11 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo11.jpg" alt="Фото 11">
-                </div>
-
-                <!-- ФОТО 10 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo10.jpg" alt="Фото 10">
-                </div>
-
-                <!-- ФОТО 9 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo9.jpg" alt="Фото 9">
-                </div>
-
-                <!-- ФОТО 8 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo8.jpg" alt="Фото 8">
-                </div>
-
-                <!-- ФОТО 7 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo7.jpg" alt="Фото 7">
-                </div>
-
-                <!-- ФОТО 6 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo6.jpg" alt="Фото 6">
-                </div>
-
-                <!-- ФОТО 5 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo5.jpg" alt="Фото 5">
-                </div>
-
-                <!-- ФОТО 4 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo4.jpg" alt="Фото 4">
-                </div>
-
-                <!-- ФОТО 3 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo3.jpg" alt="Фото 3">
-                </div>
+            <div class="gallery-wrapper">
+                <!-- Кнопки прокрутки -->
+                <button class="slider-btn left" onclick="scrollSlider(-1)">&#10094;</button>
                 
-                <!-- ФОТО 2 -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo2.jpg" alt="Фото 2">
+                <div class="gallery-slider" id="gallerySlider">
+                    <!-- ФОТО 21 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo21.jpg" alt="Фото 21">
+                    </div>
+
+                    <!-- ФОТО 20 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo20.jpg" alt="Фото 20">
+                    </div>
+
+                    <!-- ФОТО 19 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo19.jpg" alt="Фото 19">
+                    </div>
+
+                    <!-- ФОТО 18 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo18.jpg" alt="Фото 18">
+                    </div>
+
+                    <!-- ФОТО 17 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo17.jpg" alt="Фото 17">
+                    </div>
+
+                    <!-- ФОТО 16 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo16.jpg" alt="Фото 16">
+                    </div>
+
+                    <!-- ФОТО 15 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo15.jpg" alt="Фото 15">
+                    </div>
+
+                    <!-- ФОТО 14 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo14.jpg" alt="Фото 14">
+                    </div>
+
+                    <!-- ФОТО 13 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo13.jpg" alt="Фото 13">
+                    </div>
+
+                    <!-- ФОТО 12 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo12.jpg" alt="Фото 12">
+                    </div>
+
+                    <!-- ФОТО 11 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo11.jpg" alt="Фото 11">
+                    </div>
+
+                    <!-- ФОТО 10 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo10.jpg" alt="Фото 10">
+                    </div>
+
+                    <!-- ФОТО 9 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo9.jpg" alt="Фото 9">
+                    </div>
+
+                    <!-- ФОТО 8 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo8.jpg" alt="Фото 8">
+                    </div>
+
+                    <!-- ФОТО 7 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo7.jpg" alt="Фото 7">
+                    </div>
+
+                    <!-- ФОТО 6 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo6.jpg" alt="Фото 6">
+                    </div>
+
+                    <!-- ФОТО 5 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo5.jpg" alt="Фото 5">
+                    </div>
+
+                    <!-- ФОТО 4 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo4.jpg" alt="Фото 4">
+                    </div>
+
+                    <!-- ФОТО 3 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo3.jpg" alt="Фото 3">
+                    </div>
+                    
+                    <!-- ФОТО 2 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo2.jpg" alt="Фото 2">
+                    </div>
+
+                    <!-- ФОТО 1 -->
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="my-photo1.jpg" alt="Фото 1">
+                    </div>
                 </div>
 
-                <!-- ФОТО 1 (Самая старая) -->
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="my-photo1.jpg" alt="Фото 1">
-                </div>
+                <button class="slider-btn right" onclick="scrollSlider(1)">&#10095;</button>
             </div>
         </div>
     </section>
@@ -190,8 +267,19 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
+        // --- 1. Логика Слайдера (Скролл стрелками) ---
+        function scrollSlider(direction) {
+            const slider = document.getElementById('gallerySlider');
+            const scrollAmount = 320; // Примерно ширина карточки + отступ
+            
+            slider.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // --- 2. Логика Лайтбокса ---
         function openLightbox(element) {
-            // Берем src из картинки, на которую кликнули
             const imgSrc = element.querySelector('img').src; 
             lightboxImg.src = imgSrc;
             lightbox.classList.add('active');
