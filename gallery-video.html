@@ -3,199 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Меняй Title для каждой папки -->
-    <title>Конференции — ХМОВЕ</title>
-
+    <title>Видео — ХМОВЕ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS Переменные (То же самое, что и на главной) --- */
         :root {
             --bg-color: #f8f4fd;
-            --bg-secondary: #ffffff;
             --text-color: #2d2d2d;
-            --text-muted: #666666;
             --accent-primary: #9d4edd;
             --accent-deep: #7b2cbf;
             --accent-yellow: #ffcc00;
-            --gradient-main: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
             --gradient-text: linear-gradient(to right, #7b2cbf, #9d4edd);
-            --card-bg: #ffffff;
             --shadow: 0 10px 30px rgba(123, 44, 191, 0.1);
             --transition: all 0.3s ease;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; padding-bottom: 60px; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-        
-        /* --- Типографика --- */
-        h1, h2, h3 { font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
-        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
-        .section-header { text-align: center; margin-bottom: 4rem; padding-top: 120px; } /* Отступ для хедера */
-        .section-header h2 { margin-bottom: 0.5rem; font-size: 2rem; }
-        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* --- Header --- */
-        header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        
+        /* Header Styles */
+        header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 900; color: #2d2d2d; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; z-index: 1002; }
-        .logo:hover { color: var(--accent-primary); }
-        
-        .cross-icon-svg { width: 28px; height: 28px; }
-        .cross-path { animation: pulseAndGlow 3s infinite ease-in-out; transform-origin: center; }
-        @keyframes pulseAndGlow {
-            0% { fill: var(--accent-primary); transform: scale(1); filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0)); }
-            50% { fill: var(--accent-yellow); transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.6)); }
-            100% { fill: var(--accent-primary); transform: scale(1); filter: drop-shadow(0 0 0px rgba(157, 78, 221, 0)); }
-        }
+        .logo { font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+        .cross-icon-svg { width: 24px; height: 24px; animation: pulse 3s infinite; }
+        @keyframes pulse { 0% { fill: var(--accent-primary); } 50% { fill: var(--accent-yellow); } 100% { fill: var(--accent-primary); } }
 
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--accent-primary); }
+        /* Gallery Styles */
+        .section-header { text-align: center; margin-bottom: 4rem; padding-top: 120px; }
+        .section-header h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header p { color: #666; }
+        .back-link { display: inline-block; margin-bottom: 1rem; color: var(--accent-deep); font-weight: 600; }
 
-        /* --- Back Button --- */
-        .back-link { display: inline-flex; align-items: center; gap: 5px; margin-bottom: 1rem; color: var(--accent-primary); font-weight: 600; }
-        .back-link:hover { gap: 10px; }
-
-        /* --- Gallery --- */
-        .gallery { padding-bottom: 6rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
-        
-        .gallery-item {
-            position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 1 / 1; 
-            cursor: pointer; box-shadow: var(--shadow); transition: transform 0.3s;
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 16/9; cursor: pointer; box-shadow: var(--shadow); transition: transform 0.3s; background: #000; }
         .gallery-item:hover { transform: translateY(-5px); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
-        .gallery-item:hover img { transform: scale(1.08); }
-        .gallery-item::after {
-            content: '🔍'; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0); font-size: 2rem;
-            transition: transform 0.3s; opacity: 0.8; pointer-events: none;
+        
+        /* Video Element Styles inside Grid */
+        .video-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
         }
-        .gallery-item:hover::after { transform: translate(-50%, -50%) scale(1); }
+        .gallery-item:hover .video-thumb { opacity: 1; }
+        
+        /* Play Icon Overlay on Thumbnail */
+        .play-icon-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50px; height: 50px; background: rgba(255,255,255,0.8);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            pointer-events: none; transition: transform 0.3s;
+        }
+        .play-icon-overlay svg { width: 24px; height: 24px; fill: var(--accent-deep); margin-left: 3px; }
+        .gallery-item:hover .play-icon-overlay { transform: translate(-50%, -50%) scale(1.1); }
 
-        /* --- Footer --- */
-        footer { background: #2d2d2d; padding: 4rem 0 2rem; text-align: center; color: #ccc; margin-bottom: 100px; }
-        footer .logo { justify-content: center; margin-bottom: 1rem; color: white; z-index: auto; display: inline-flex; }
-        .footer-slogan { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: white; }
-        .footer-links { margin: 2rem 0; display: flex; justify-content: center; gap: 3rem; align-items: center; }
-        .footer-links a { font-size: 1.1rem; color: #fff; font-weight: 600; }
-        .footer-links a:hover { color: var(--accent-yellow); }
-        .phone-contact { display: flex; flex-direction: column; align-items: center; }
-        .contact-label { font-size: 0.8rem; color: #999; margin-top: 0.2rem; font-weight: 400; }
-        .copyright { color: #777; font-size: 0.75rem; margin-top: 3rem; max-width: 800px; margin: 3rem auto 0; line-height: 1.4; }
-
-        /* --- Lightbox --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; backdrop-filter: blur(5px); }
+        /* Lightbox for Video */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; backdrop-filter: blur(5px); }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .close-modal { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: white; cursor: pointer; z-index: 3001; }
-        .lightbox-img { max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s; }
-        .modal-overlay.active .lightbox-img { transform: scale(1); }
-
-        /* --- Media Queries --- */
-        @media (max-width: 768px) {
-            .section-header { padding-top: 100px; }
-            .nav-links { display: none; } /* Скрываем меню на подпадинах для простоты или можно оставить */
-            .footer-links { gap: 1.5rem; flex-direction: column; }
-            .copyright { padding: 0 10px; font-size: 0.7rem; }
-        }
+        
+        /* Video Player in Lightbox */
+        .lightbox-video-container { width: 90%; max-width: 1000px; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5); background: #000; }
+        .lightbox-video { width: 100%; display: block; max-height: 80vh; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
-                <!-- Логотип ведет на главную -->
                 <a href="index.html" class="logo">
-                    <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
-                        <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
-                    </svg>
+                    <svg class="cross-icon-svg" viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="20" rx="2" /><rect x="5" y="8" width="14" height="4" rx="2" /></svg>
                     ХМОВЕ
                 </a>
-                
-                <div class="nav-links">
-                    <!-- Ссылка на главную галерею -->
-                    <a href="index.html#gallery">Все Фото</a>
-                </div>
+                <div style="font-weight: 600; font-size: 0.9rem;"><a href="index.html#gallery">Вернуться</a></div>
             </nav>
         </div>
     </header>
 
-    <!-- Gallery Content -->
-    <section class="gallery">
+    <section>
         <div class="container">
             <div class="section-header">
-                <!-- Меняй заголовок здесь -->
-                <a href="index.html#gallery" class="back-link">← Вернуться к категориям</a>
-                <h2>Конференции</h2>
-                <p>Моменты наших больших молодежных собраний</p>
+                <a href="index.html#gallery" class="back-link">← Назад к категориям</a>
+                <h2>Видео</h2>
+                <p>Записи наших служений и моментов</p>
             </div>
 
-            <!-- Здесь вставляй нужные картинки для этой папки -->
             <div class="gallery-grid">
-                <!-- Примеры картинок для конференции -->
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/conference1/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/conference2/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/conference3/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/conf/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/meet/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/hall/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/stage/800/800" alt="Conf"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/people/800/800" alt="Conf"></div>
+                <!-- ВИДЕО 1 -->
+                <!-- poster - это картинка-обложка для превью. src - само видео файл -->
+                <div class="gallery-item" onclick="openVideoLightbox('my-video1.mp4', 'poster1.jpg')">
+                    <video class="video-thumb" poster="poster1.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ВИДЕО 2 -->
+                <div class="gallery-item" onclick="openVideoLightbox('my-video2.mp4', 'poster2.jpg')">
+                    <video class="video-thumb" poster="poster2.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                
+                 <!-- ВИДЕО 3 -->
+                 <div class="gallery-item" onclick="openVideoLightbox('my-video3.mp4', 'poster3.jpg')">
+                    <video class="video-thumb" poster="poster3.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (упрощенный) -->
-    <footer>
-        <div class="container">
-            <a href="index.html" class="logo">
-                 <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
-                    <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
-                </svg>
-                ХМОВЕ
-            </a>
-            <div class="footer-slogan">Только с Иисусом!</div>
-            <div class="copyright">
-                МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ ЦЕРКОВЬ ХРИСТИАН ВЕРЫ ЕВАНГЕЛЬСКОЙ "ВИФАНИЯ" Г. СОЧИ<br>
-                ИНН 2319047504 КПП 231801001 ОГРН 1102300000923 от 10.02.2010г.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Lightbox для фото -->
+    <!-- Lightbox for Videos -->
     <div id="lightbox" class="modal-overlay" onclick="closeLightbox(event)">
         <span class="close-modal" onclick="closeLightbox(event)">&times;</span>
-        <img class="lightbox-img" id="lightbox-img" src="" alt="Full view">
+        <div class="lightbox-video-container" onclick="event.stopPropagation()">
+            <video id="lightbox-video" class="lightbox-video" controls>
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
     </div>
 
-    <!-- Scripts (Только lightbox и прокрутка) -->
     <script>
-        // --- Lightbox ---
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxVideo = document.getElementById('lightbox-video');
 
-        function openLightbox(element) {
-            const imgSrc = element.querySelector('img').src;
-            lightboxImg.src = imgSrc; 
+        // Функция открытия видео
+        function openVideoLightbox(videoSrc, posterSrc) {
+            lightboxVideo.src = videoSrc;
+            lightboxVideo.poster = posterSrc;
+            lightboxVideo.play(); // Автоплей при открытии
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox(event) {
-            if (event.target !== lightboxImg) {
+            // Закрываем, если клик не по самому видео
+            if (event.target !== lightboxVideo) {
+                lightboxVideo.pause();
+                lightboxVideo.src = ""; // Очищаем источник
                 lightbox.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
