@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Наши фильмы и озвучки — ХМОВЕ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -111,6 +112,62 @@
                         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
+
+                <!-- ФИЛЬМ 4 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film4.mp4', 'poster-film4.jpg')">
+                    <video class="video-thumb" poster="poster-film4.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 5 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film5.mp4', 'poster-film5.jpg')">
+                    <video class="video-thumb" poster="poster-film5.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 6 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film6.mp4', 'poster-film6.jpg')">
+                    <video class="video-thumb" poster="poster-film6.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 7 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film7.mp4', 'poster-film7.jpg')">
+                    <video class="video-thumb" poster="poster-film7.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 8 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film8.mp4', 'poster-film8.jpg')">
+                    <video class="video-thumb" poster="poster-film8.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 9 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film9.mp4', 'poster-film9.jpg')">
+                    <video class="video-thumb" poster="poster-film9.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+
+                <!-- ФИЛЬМ 10 (НОВЫЙ) -->
+                <div class="gallery-item" onclick="openVideoLightbox('film10.mp4', 'poster-film10.jpg')">
+                    <video class="video-thumb" poster="poster-film10.jpg" muted></video>
+                    <div class="play-icon-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -129,7 +186,7 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxVideo = document.getElementById('lightbox-video');
 
-        // Функция открытия видео
+        // Функция открытия видео или аудио в Lightbox
         function openVideoLightbox(videoSrc, posterSrc) {
             lightboxVideo.src = videoSrc;
             lightboxVideo.poster = posterSrc;
