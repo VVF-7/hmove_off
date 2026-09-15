@@ -355,7 +355,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 30px rgba(255, 204, 0, 0.6);
-            transition: transform: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .video-overlay:hover .play-btn-circle {
@@ -416,17 +416,9 @@
         }
 
         /* --- GALLERY SECTION --- */
-        #gallery { padding: 6rem 0; background-color: var(--bg-color); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
+        .gallery {
+            padding: 6rem 0;
+            background-color: var(--bg-color);
         }
 
         .gallery-filters {
@@ -438,6 +430,7 @@
         }
 
         .filter-btn {
+            /* Стили адаптированы и для <a> тегов */
             padding: 0.8rem 2rem;
             border-radius: 30px;
             background: white;
@@ -501,6 +494,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
             display: block;
         }
 
@@ -682,21 +676,16 @@
 
         .footer-links a:hover { color: var(--accent-yellow); }
         
-        .footer-links .films-link {
-            background: white;
-            color: #2d2d2d;
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .footer-links .films-link:hover {
-            background: var(--accent-deep);
+        /* Специфичные стили для подвала, чтобы все было по центру */
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 1rem;
             color: white;
-            transform: translateY(-2px);
+            z-index: auto;
         }
-
-        .footer-links .phone-contact {
+        
+        /* Стили для блока телефона с подписью */
+        .phone-contact {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -739,7 +728,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             z-index: 2000;
             border: 1px solid rgba(255,255,255,0.5);
-            transition: transform: translateX(-50%) translateY(-2px);
+            transition: transform 0.3s ease;
         }
         
         .music-player:hover {
@@ -801,7 +790,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform: scale(1.1);
+            transition: transform 0.2s;
             box-shadow: 0 4px 10px rgba(123, 44, 191, 0.3);
         }
 
@@ -836,6 +825,56 @@
         }
 
         .time { font-size: 0.65rem; color: #888; font-weight: 600; }
+
+        /* --- NEW STYLES: LIGHTBOX --- */
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            z-index: 3001;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover { color: var(--accent-yellow); }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .lightbox-img {
+            transform: scale(1);
+        }
 
         /* Scroll to Top */
         .scroll-top {
@@ -879,20 +918,48 @@
             .event-date { flex-direction: row; gap: 10px; padding: 1rem; min-width: auto; }
             .event-date .day { font-size: 1.5rem; }
             
-            .gallery-filters { gap: 0.5rem; }
-            .filter-btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
-
+            .music-player {
+                width: 95%;
+                bottom: 15px;
+                padding: 8px 15px;
+            }
+            .track-text p { display: none; }
+            .player-right { width: 60px; }
+            
             .close-modal { top: 10px; right: 15px; font-size: 2.5rem; }
-
-            .copyright { padding: 0 10px; font-size: 0.8rem; }
-
-            .footer-links { flex-direction: column; gap: 1.5rem; }
+            
+            .play-btn-circle {
+                width: 60px;
+                height: 60px;
+            }
+            .play-icon {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .gallery-filters {
+                gap: 0.5rem;
+            }
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                gap: 1.5rem;
+                flex-direction: column;
+            }
+            
+            .copyright {
+                padding: 0 10px;
+                font-size: 0.7rem; 
+            }
         }
 
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform: 0.8s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .fade-in.visible {
             opacity: 1;
@@ -911,13 +978,13 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
+                <a href="index.html" class="logo">
                     <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
                         <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
                     </svg>
                     ХМОВЕ
-                </div>
+                </a>
                 
                 <div class="nav-links">
                     <a href="#events">События</a>
@@ -941,7 +1008,7 @@
     <div class="mobile-nav" id="mobileNav">
         <a href="#events" class="mobile-link">События</a>
         <a href="#gallery" class="mobile-link">Галерея</a>
-        <a href="#mission" class="mobil-link">О нас</a>
+        <a href="#mission" class="mobile-link">О нас</a>
         <a href="#footer" class="mobile-link">Контакты</a>
     </div>
 
@@ -950,7 +1017,7 @@
         <div class="hero-content">
             <h1 class="hero-main-title">ХМОВЕ</h1>
             <p class="hero-subtitle">Христианское молодежное объединение веры евангельской</p>
-            <h1>ТОЛЬКО С <span class="highlight">ИИИИСУСОМ</span></h1>
+            <h1>ТОЛЬКО С <span class="highlight">ИИИСУСОМ</span></h1>
             <p>Мы - семья. Мы - движение. Объединение молодых, горящих сердец из разных городов и церквей.</p>
         </div>
     </section>
@@ -964,7 +1031,6 @@
             </div>
 
             <div class="video-container fade-in">
-                <!-- Добавил атрибут controls -->
                 <video id="promoVideo" class="video-player" poster="promo.jpg" controls>
                     <source src="Promo.mp4" type="video/mp4">
                     Ваш браузер не поддерживает видео тег.
@@ -980,32 +1046,30 @@
     </section>
 
     <!-- EVENTS SECTION -->
-    <section id="events">
-        <div class="events">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2>Ближайшие события</h2>
-                    <p>Не пропусти наши встречи!</p>
-                </div>
+    <section id="events" class="events">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Ближайшие события</h2>
+                <p>Не пропусти наши встречи!</p>
+            </div>
 
-                <div class="events-list">
-                    <div class="event-card fade-in">
-                        <div class="event-date">
-                            <span class="day" style="font-size: 1.8rem; line-height: 1;">27-30</span>
-                            <span class="month">ОКТ</span>
+            <div class="events-list">
+                <div class="event-card fade-in">
+                    <div class="event-date">
+                        <span class="day" style="font-size: 1.8rem; line-height: 1;">27-30</span>
+                        <span class="month">ОКТ</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>Молодежная встреча "Двоим лучше, нежели одному"</h3>
+                        <div class="event-meta">
+                            <span>📍 Краснодар</span>
+                            <span>📅 Октябрь 2026</span>
                         </div>
-                        <div class="event-info">
-                            <h3>Молодежная встреча "Двоим лучше, нежели одному"</h3>
-                            <div class="event-meta">
-                                <span>📍 Краснодар</span>
-                                <span>📅 Октябрь 2026</span>
-                            </div>
-                            <p>3 дня об отношениях, браке и семье. Время, когда мы вместе ищем Божий план для наших отношений.</p>
-                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--accent-deep); font-weight: 700; text-align: center; font-style: italic;">
-                                Екклесиаст 4:9
-                            </div>
-                            <a href="https://vvf-7.github.io/hmove/" target="_blank" class="btn btn-primary" style="margin-top: 1rem; width: 100%; box-sizing: border-box; text-align: center;">Подробнее</a>
+                        <p>3 дня об отношениях, браке и семье. Время, когда мы вместе ищем Божий план для наших отношений.</p>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--accent-deep); font-weight: 700; text-align: center; font-style: italic;">
+                            Екклесиаст 4:9
                         </div>
+                        <a href="https://vvf-7.github.io/hmove/" target="_blank" class="btn btn-primary" style="margin-top: 1rem; width: 100%; box-sizing: border-box; text-align: center;">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -1013,44 +1077,22 @@
     </section>
 
     <!-- GALLERY SECTION -->
-    <section id="gallery">
-        <div class="gallery">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2>Фотоотчеты</h2>
-                    <p>Моменты, которые мы запомнили навсегда</p>
-                </div>
-
-                <!-- Ссылки на страницы папок -->
-                <div class="gallery-filters fade-in">
-                    <a href="gallery-photo.html" class="filter-btn">Фото</a>
-                    <a href="gallery-video.html" class="filter-btn">Видео</a>
-                    <!-- УДАЛЕЛЕНЫЙ БЛОК НА ГЛАВНУЮ ССЯЗЫТЬ (Наши фильмы и озвучки) -->
-                <!-- Убираем стиль `.nav-btn-desktop`, чтобы она была похожа на кнопку, но в меню оставим обычный текст без жирного шрифта -->
-                <div class="nav-links">
-                    <a href="#events">События</a>
-                    <a href="#gallery">Галерея</a>
-                    <a href="#mission">О нас</a>
-                    <a href="#footer">Контакты</a>
-                </div>
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Фотоотчеты</h2>
+                <p>Выберите категорию, чтобы увидеть контент</p>
             </div>
 
-            <!-- Главная сетка показывает микс всех категорий (показываем все фото, чтобы не только фото) -->
-            <div class="gallery-grid fade-in">
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/worship/800/800" alt="Conference"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/friends/800/800" alt="Friends"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/camp/800/800" alt="Camp"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/guitar/800/800" alt="Music"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/bible/800/800" alt="Study"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/smile/800/800" alt="Joy"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/team/800/800" alt="Team"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/pray/800/800" alt="Prayer"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/concert/800/800" alt="Concert"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/concert/800/800" alt="Prayer"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/photo6/800/800" alt="Photo"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/hug/800/800" alt="Hug"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://picsum.photos/seed/hug/800/800" alt="Hug"></div>
+            <!-- Ссылки на страницы папок (Только Кнопки) -->
+            <div class="gallery-filters fade-in">
+                <a href="gallery-photo.html" class="filter-btn">Фото</a>
+                <a href="gallery-video.html" class="filter-btn">Видео</a>
+                <a href="gallery-films.html" class="filter-btn">Наши фильмы</a>
             </div>
+
+            <!-- Сетка с фото УДАЛЕНА -->
+            
         </div>
     </section>
 
@@ -1075,7 +1117,7 @@
 
                 <div class="mission-col fade-in">
                     <h3>Привлечение</h3>
-                    <p>Мы хотим, чтобы каждый молодой человек нашел свой путь к Богу и укоренился в веру через современные форматы общения.</p>
+                    <p>Мы хотим, чтобы каждый молодой человек нашел свой путь к Богу и укоренился в вере через современные форматы общения.</p>
                     <ul class="mission-list">
                         <li>Заинтересовать</li>
                         <li>Подвести к покаянию и крещению</li>
@@ -1107,7 +1149,7 @@
 
             <div class="testimonials-grid">
                 <div class="quote-card fade-in">
-                    <p class="quote-text">В 2020 году я пришла на ХМОВЕ случайно. Не ждала ничего особенного — просто пришла. Но со временем поняла: случайностей не бывает. Это больше, чем движение. Это дом. Это семья. Это семья — с общей историей, добрыми традициями и любовью ко Христу, которая связывает нас крепче любых уз. Это счасть — быть частью. Присоединяйся и ты, будет здорово!</p>
+                    <p class="quote-text">В 2020 году я пришла на ХМОВЕ случайно. Не ждала ничего особенного — просто пришла. Но со временем поняла: случайностей не бывает. Это больше, чем движение. Это дом. Это семья — с общей историей, добрыми традициями и любовью ко Христу, которая связывает нас крепче любых уз. Это счастье — быть частью. Присоединяйся и ты, будет здорово!</p>
                     <div class="quote-author">
                         <div class="avatar">В</div>
                         <div class="author-info">
@@ -1143,7 +1185,7 @@
     <!-- Footer -->
     <footer id="footer">
         <div class="container">
-            <div class="logo" style="margin-bottom: 1rem; color: white;">
+            <a href="index.html" class="logo">
                  <svg class="cross-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <rect class="cross-path" x="10" y="2" width="4" height="20" rx="2" />
                     <rect class="cross-path" x="5" y="8" width="14" height="4" rx="2" />
@@ -1164,7 +1206,7 @@
             </div>
 
             <div class="copyright">
-                МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ ЦЕРКОВЬ ХРИСТИАН ВЕРЫ ЕВАНГЕЛЬСКОЙ Г. СОЧИ <br>
+                МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ ЦЕРКОВЬ ХРИСТИАН ВЕРЫ ЕВАНГЕЛЬСКОЙ "ВИФАНИЯ" Г. СОЧИ<br>
                 ИНН 2319047504 КПП 231801001 ОГРН 1102300000923 от 10.02.2010г.
             </div>
         </div>
@@ -1287,6 +1329,7 @@
             if (video) {
                 video.play().catch(error => {
                     console.error("Ошибка воспроизведения:", error);
+                });
                 overlay.style.display = 'none';
             }
         }
@@ -1308,7 +1351,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
 
         function openLightbox(element) {
-            const imgSrc = element.querySelector('img').src; 
+            const imgSrc = element.querySelector('img').src;
             lightboxImg.src = imgSrc; 
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1351,14 +1394,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el => observer.observe(el));
-        
-        // --- 7. Логика Фильтрации Галереи (Папки) ---
-        function filterGallery(category, btnElement) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
-        }
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
